@@ -1,5 +1,6 @@
 package com.example.converseaienhanced;
 
+import com.example.converseaienhanced.Model.Model;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -11,6 +12,8 @@ public class main extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(main.class.getResource("hello-view.fxml"));
+        Model model = new Model();
+        model.chatGptOutput("Hello, how are you?");
         Scene scene = new Scene(fxmlLoader.load(), 320, 240);
         stage.setTitle("Hello!");
         stage.setScene(scene);

@@ -1,6 +1,9 @@
 module com.example.converseaienhanced {
     requires javafx.controls;
     requires javafx.fxml;
+    requires org.apache.httpcomponents.httpclient;
+    requires org.apache.httpcomponents.httpcore;
+    requires org.json;
 
 
     opens com.example.converseaienhanced to javafx.fxml;
