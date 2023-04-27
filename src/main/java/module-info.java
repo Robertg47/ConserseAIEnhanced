@@ -5,4 +5,6 @@ module com.example.converseaienhanced {
 
     opens com.example.converseaienhanced to javafx.fxml;
     exports com.example.converseaienhanced;
+    exports com.example.converseaienhanced.Controller;
+    opens com.example.converseaienhanced.Controller to javafx.fxml;
 }
