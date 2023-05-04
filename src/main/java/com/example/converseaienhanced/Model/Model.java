@@ -7,13 +7,12 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
+import org.apache.http.util.EntityUtils;
 import org.json.JSONObject;
 import org.json.JSONArray;
 
-import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
-import java.util.Scanner;
-import Password.Password; // Uncomment if you have a separate Password class
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class Model {
     private final String apiEndpoint = "https://api.openai.com/v1/chat/completions";
@@ -23,7 +22,11 @@ public class Model {
         this.apiKey = Password.getApiKey();// Replace with your actual API key or use a separate Password class
     }
 
-    public void chatGptOutput(String message) {
+    public String chatGptOutput(String message) {
+        System.out.println("User: " + message);
+        System.out.println();
+
+        String answer = "SUPER ERROR";
         CloseableHttpClient httpClient = HttpClients.createDefault();
 
         try {
@@ -48,18 +51,18 @@ public class Model {
 
             try (response) {
                 HttpEntity entity = response.getEntity();
-                if (entity != null) {
-                    InputStream inputStream = entity.getContent();
-                    String responseBody = new Scanner(inputStream, StandardCharsets.UTF_8)
-                            .useDelimiter("\r")
-                            .next();
-                    JSONObject jsonResponse = new JSONObject(responseBody);
-                    String output = jsonResponse.getJSONArray("choices")
-                            .getJSONObject(0)
-                            .getJSONObject("message")
-                            .getString("content");
-                    System.out.println("Output: " + output.trim());
-                }
+                String json = EntityUtils.toString(entity, "UTF-8");
+                System.out.println("json:");
+                System.out.println(json);
+
+                // create an ObjectMapper instance
+                ObjectMapper objectMapper = new ObjectMapper();
+
+                // parse the JSON string into a JsonNode object
+                JsonNode rootNode = objectMapper.readTree(json);
+
+                String content = rootNode.path("choices").get(0).path("message").path("content").asText();
+                answer = content;
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -70,5 +73,6 @@ public class Model {
                 e.printStackTrace();
             }
         }
+        return answer;
     }
 }
