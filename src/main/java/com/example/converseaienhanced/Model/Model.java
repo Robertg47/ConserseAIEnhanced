@@ -22,7 +22,7 @@ public class Model {
         this.apiKey = Password.getApiKey();// Replace with your actual API key or use a separate Password class
     }
 
-    public String chatGptOutput(String message) {
+    public String chatGptApiCall(String message) {
         System.out.println("User: " + message);
         System.out.println();
 
