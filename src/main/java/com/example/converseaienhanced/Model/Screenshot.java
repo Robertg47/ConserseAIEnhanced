@@ -12,38 +12,35 @@ import javax.imageio.ImageIO;
 
 public class Screenshot {
 
-    public static void takeScreenshot(String outputFilePath) throws IOException, AWTException {
+    public static void takeScreenshot(String outputFilePath) throws IOException, AWTException, InterruptedException {
         String osName = System.getProperty("os.name").toLowerCase();
+
+        ProcessBuilder pb;
 
         if (osName.contains("win")) {
             System.out.println("windows os detected");
-            // Windows OS
-            ProcessBuilder pb = new ProcessBuilder("snippingtool", "/clip");
-            pb.start();
+            pb = new ProcessBuilder("snippingtool", "/clip");
 
-            // Wait for the snipping tool to close and retrieve the screenshot from the clipboard
-            try {
-                Thread.sleep(500); // Wait for the snipping tool to load
-                BufferedImage image = (BufferedImage) Toolkit.getDefaultToolkit().getSystemClipboard().getData(DataFlavor.imageFlavor);
-
-                // Save the screenshot to the specified output file path
-                File output = new File(outputFilePath);
-                ImageIO.write(image, "png", output);
-            } catch (InterruptedException | UnsupportedFlavorException | IOException e) {
-                e.printStackTrace();
-            }
         } else if (osName.contains("mac")) {
             System.out.println("macOS detected");
-            // macOS
-            Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-            Rectangle screenRectangle = new Rectangle(screenSize);
-            Robot robot = new Robot();
-            BufferedImage image = robot.createScreenCapture(screenRectangle);
-            File output = new File(outputFilePath);
-            ImageIO.write(image, "png", output);
+            pb = new ProcessBuilder("screencapture", "-i", outputFilePath);
         } else {
             // Unsupported OS
             throw new UnsupportedOperationException("Screenshot functionality not supported on this OS");
         }
+        Process process = pb.start();
+        process.waitFor();
+        // Wait for the snipping tool/screencapture to close and retrieve the screenshot from the clipboard
+        BufferedImage image = null;
+        while (image == null) {
+            try {
+                Thread.sleep(100);
+                image = (BufferedImage) Toolkit.getDefaultToolkit().getSystemClipboard().getData(DataFlavor.imageFlavor);
+            } catch (InterruptedException | UnsupportedFlavorException | IOException e) {
+                e.printStackTrace();
+            }
+        }
+        File output = new File(outputFilePath); // your output file path
+        ImageIO.write(image, "png", output);
     }
 }

@@ -1,17 +1,18 @@
 package com.example.converseaienhanced.View;
 
 import com.example.converseaienhanced.Model.Screenshot;
+import com.example.converseaienhanced.main;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
 import java.awt.*;
 import java.io.IOException;
 import java.util.Date;
 
 public class View {
-    public void screenshot(){
-        try {
-            Screenshot.takeScreenshot("C:\\Users\\rober\\IdeaProjects\\ConserseAIEnhanced\\src\\main\\resources\\Screenshots\\");
-        } catch (IOException | AWTException e){
-            e.printStackTrace();
-        }
-    }
+    FXMLLoader fxmlLoader;
+    Scene scene;
+
+
 }
