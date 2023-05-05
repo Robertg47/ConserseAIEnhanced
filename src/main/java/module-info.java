@@ -5,6 +5,8 @@ module com.example.converseaienhanced {
     requires org.apache.httpcomponents.httpcore;
     requires org.json;
     requires com.fasterxml.jackson.databind;
+    requires java.desktop;
+    requires javafx.swing;
 
 
     opens com.example.converseaienhanced to javafx.fxml;
