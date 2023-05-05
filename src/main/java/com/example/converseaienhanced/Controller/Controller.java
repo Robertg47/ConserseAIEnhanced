@@ -5,6 +5,8 @@ import com.example.converseaienhanced.View.View;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
+import java.io.IOException;
+
 public class Controller {
 
     Model model;
@@ -21,5 +23,11 @@ public class Controller {
     @FXML
     protected void takeScreenshot() {
         model.screenshot();
+        try {
+            Thread.sleep(100);
+            view.setSceneToShowScreenshot();
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
