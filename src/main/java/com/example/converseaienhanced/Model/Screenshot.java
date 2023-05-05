@@ -16,7 +16,7 @@ public class Screenshot {
         String osName = System.getProperty("os.name").toLowerCase();
 
         ProcessBuilder pb;
-
+        // create process with CMD command specific to OS user is using
         if (osName.contains("win")) {
             System.out.println("windows os detected");
             pb = new ProcessBuilder("snippingtool", "/clip");
@@ -32,15 +32,14 @@ public class Screenshot {
         process.waitFor();
         // Wait for the snipping tool/screencapture to close and retrieve the screenshot from the clipboard
         BufferedImage image = null;
-        while (image == null) {
-            try {
-                Thread.sleep(100);
-                image = (BufferedImage) Toolkit.getDefaultToolkit().getSystemClipboard().getData(DataFlavor.imageFlavor);
-            } catch (InterruptedException | UnsupportedFlavorException | IOException e) {
-                e.printStackTrace();
-            }
+        try {
+            Thread.sleep(100);
+            image = (BufferedImage) Toolkit.getDefaultToolkit().getSystemClipboard().getData(DataFlavor.imageFlavor);
+        } catch (InterruptedException | UnsupportedFlavorException | IOException e) {
+            e.printStackTrace();
         }
         File output = new File(outputFilePath); // your output file path
+        assert image != null;
         ImageIO.write(image, "png", output);
     }
 }
