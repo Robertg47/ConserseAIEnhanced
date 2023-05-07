@@ -1,14 +1,14 @@
 package com.example.converseaienhanced;
 
-import com.example.converseaienhanced.Controller.Controller;
 import com.example.converseaienhanced.Model.Model;
+import com.example.converseaienhanced.Controller.Controller;
 import com.example.converseaienhanced.View.View;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+//import java.io.File;
 import java.io.IOException;
+
 
 public class main extends Application {
     @Override
@@ -18,6 +18,7 @@ public class main extends Application {
         Controller controller = new Controller(model, view);
         view.initialize(stage, controller);
     }
+
 
     public static void main(String[] args) {
         launch();
