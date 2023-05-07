@@ -47,12 +47,9 @@ public class Controller {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
-        // Get the result of the task
-        String text = task.getValue();
         
-        System.out.println(text);
-        view.ocrResponseTextFieldChange(text);
+        System.out.println(ImageToTextApiRequestTask.result);
+        view.ocrResponseTextFieldChange(ImageToTextApiRequestTask.result);
     }
 
     public File getLastScreenshot(){

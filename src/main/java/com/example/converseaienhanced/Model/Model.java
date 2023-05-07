@@ -42,7 +42,7 @@ public class Model {
         ImageToTextApiRequestTask task = new ImageToTextApiRequestTask(file);
         String txt = "";
         try {
-            txt = task.call();
+            task.call();
         } catch (Exception e) {
             e.printStackTrace();
         }
