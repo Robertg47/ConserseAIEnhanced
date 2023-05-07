@@ -9,6 +9,9 @@ import java.util.Scanner;
 
 import javafx.concurrent.Task;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 public class ImageToTextApiRequestTask  extends Task<String>  {
     private final String apiUrl = "http://localhost:8080/ocr";
 
@@ -48,7 +51,11 @@ public class ImageToTextApiRequestTask  extends Task<String>  {
             // Handle response
             String text = null;
             try {
-                text = getTextValue(jsonResponse);
+                //text = getTextValue(jsonResponse);
+                ObjectMapper objectMapper = new ObjectMapper();
+                JsonNode rootNode = objectMapper.readTree(jsonResponse);
+                text = rootNode.get("text").asText();
+                //System.out.println(text);
             } catch (Exception e) {
                 // "text" key not found in JSON response
             }
@@ -57,17 +64,5 @@ public class ImageToTextApiRequestTask  extends Task<String>  {
             e.printStackTrace();
             return null;
         }
-    }
-
-    public String getTextValue(String jsonString) {
-        jsonString = jsonString.replaceAll("[{}]", "");
-        String[] pairs = jsonString.split(",");
-        for (String pair : pairs) {
-            String[] keyValue = pair.split(":");
-            if (keyValue[0].replaceAll("\"", "").equals("text")){
-                return keyValue[1];
-            }
-        }
-        return null;
     }
 }
