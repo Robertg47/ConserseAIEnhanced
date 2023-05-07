@@ -60,6 +60,12 @@ public class View {
     public void setSceneToAskForScreenshot(){
         stage.setScene(askForScreenshotScene);
     }
+
+    public void ocrResponseTextFieldChange(String ocrResponce){
+        ocrResponse.setText(ocrResponce);
+    }
+
+
     public void setSceneToShowScreenshot(File newestScreenshot) {
         String path = newestScreenshot.getPath();
         String url = "empty";

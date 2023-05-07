@@ -36,13 +36,14 @@ public class Controller {
 
     @FXML
     protected void process() {
-        model.process(getLastScreenshot());
+        String ocrResponse = model.process(getLastScreenshot());
         try {
             Thread.sleep(100);
             view.setSceneToShowScreenshot(getLastScreenshot());
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
+        view.ocrResponseTextFieldChange(ocrResponse);
     }
 
     public File getLastScreenshot(){
