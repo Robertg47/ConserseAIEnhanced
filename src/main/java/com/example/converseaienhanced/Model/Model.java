@@ -14,12 +14,25 @@ import org.json.JSONArray;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import java.awt.*;
+import java.io.IOException;
+
 public class Model {
     private final String apiEndpoint = "https://api.openai.com/v1/chat/completions";
     private final String apiKey;
 
     public Model() {
         this.apiKey = Password.getApiKey();// Replace with your actual API key or use a separate Password class
+    }
+
+    public void screenshot(){
+        try {
+            long milliseconds = System.currentTimeMillis();
+            Screenshot.takeScreenshot(".\\src\\main\\resources\\Screenshots\\" + milliseconds + ".png");
+        } catch (IOException | AWTException | InterruptedException e){
+            e.printStackTrace();
+        }
+        System.out.println("screenshot taken");
     }
 
     public String chatGptApiCall(String message) {
