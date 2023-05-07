@@ -13,7 +13,10 @@ import javafx.stage.Stage;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.net.MalformedURLException;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.Date;
 
 public class View {
@@ -53,11 +56,17 @@ public class View {
     }
     public void setSceneToShowScreenshot() {
         File screenshotsDir = new File(".\\src\\main\\resources\\Screenshots");
+        String osName = System.getProperty("os.name").toLowerCase();
+        if (osName.contains("mac")) {
+            screenshotsDir = new File("src/main/resources/Screenshots");
+        }
         File[] screenshots = screenshotsDir.listFiles();
         if (screenshots == null || screenshots.length-1 == -1) {
             System.out.println("no screenshots detected");
             return;
         }
+        Arrays.sort(screenshots, Comparator.comparing(File::getName));
+
         File newestScreenshot = screenshots[screenshots.length-1];
         String path = newestScreenshot.getPath();
         String url = "empty";
