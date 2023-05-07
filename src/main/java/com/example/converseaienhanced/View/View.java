@@ -49,8 +49,6 @@ public class View {
             askForScreenshotScene = new Scene(askForScreenshotFXML.load(), 200, 200);
             screenshotDialogScene = new Scene(screenshotDialogFXML.load(), 470, 460);
             screenshotImageView = (ImageView) screenshotDialogFXML.getNamespace().get("screenshotImageView");
-            // askGPTbtn = (Button) screenshotDialogFXML.getNamespace().get("askGPTbtn");
-            // ocrResponse = (Label) screenshotDialogFXML.getNamespace().get("ocrResponse");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

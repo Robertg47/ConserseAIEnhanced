@@ -31,7 +31,7 @@ public class Model {
     public void screenshot(){
         try {
             long milliseconds = System.currentTimeMillis();
-            Screenshot.takeScreenshot(".\\src\\main\\resources\\Screenshots\\" + milliseconds + ".png");
+            Screenshot.takeScreenshot(".\\src\\main\\resources\\screenshots\\" + milliseconds + ".png");
         } catch (IOException | AWTException | InterruptedException e){
             e.printStackTrace();
         }
