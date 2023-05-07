@@ -55,10 +55,10 @@ public class View {
         stage.setScene(askForScreenshotScene);
     }
     public void setSceneToShowScreenshot() {
-        File screenshotsDir = new File(".\\src\\main\\resources\\Screenshots");
+        File screenshotsDir = new File(".\\src\\main\\resources\\screenshots");
         String osName = System.getProperty("os.name").toLowerCase();
         if (osName.contains("mac")) {
-            screenshotsDir = new File("src/main/resources/Screenshots");
+            screenshotsDir = new File("src/main/resources/screenshots");
         }
         File[] screenshots = screenshotsDir.listFiles();
         if (screenshots == null || screenshots.length-1 == -1) {
