@@ -1,5 +1,6 @@
 package com.example.converseaienhanced.Controller;
 
+import com.example.converseaienhanced.Model.ImageToTextApiRequestTask;
 import com.example.converseaienhanced.Model.Model;
 import com.example.converseaienhanced.View.View;
 import javafx.fxml.FXML;
@@ -36,14 +37,22 @@ public class Controller {
 
     @FXML
     protected void process() {
-        String ocrResponse = model.process(getLastScreenshot());
+        ImageToTextApiRequestTask task = new ImageToTextApiRequestTask(getLastScreenshot());
+
+        Thread thread = new Thread(task);
+        thread.start();
+
         try {
-            Thread.sleep(100);
-            view.setSceneToShowScreenshot(getLastScreenshot());
+            thread.join(); // Wait for the thread to finish
         } catch (InterruptedException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
-        view.ocrResponseTextFieldChange(ocrResponse);
+
+        // Get the result of the task
+        String text = task.getValue();
+        
+        System.out.println(text);
+        view.ocrResponseTextFieldChange(text);
     }
 
     public File getLastScreenshot(){

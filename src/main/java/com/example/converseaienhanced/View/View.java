@@ -23,14 +23,16 @@ public class View {
 
     @FXML
     private ImageView screenshotImageView;
+    @FXML 
+    private TextField ocrResponse;
+    @FXML 
+    private Label chatGPTResponseLabel;
+
     FXMLLoader askForScreenshotFXML;
     FXMLLoader screenshotDialogFXML;
-    // Label ocrResponse;
-    // Button askGPTbtn;
 
 
-    @FXML private TextField ocrResponse;
-    @FXML private Label chatGPTResponseLabel;
+    
 
     Stage stage;
 
@@ -49,7 +51,7 @@ public class View {
             askForScreenshotScene = new Scene(askForScreenshotFXML.load(), 200, 200);
             screenshotDialogScene = new Scene(screenshotDialogFXML.load(), 470, 460);
             screenshotImageView = (ImageView) screenshotDialogFXML.getNamespace().get("screenshotImageView");
-        } catch (IOException e) {
+            } catch (IOException e) {
             throw new RuntimeException(e);
         }
         stage.setTitle("Hello!");
