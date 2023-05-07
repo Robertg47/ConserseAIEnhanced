@@ -14,8 +14,11 @@
             <ImageView fx:id="screenshotImageView" fitHeight="400" fitWidth="450" preserveRatio="true" />
             <HBox alignment="CENTER" spacing="10">
                 <Button text="Retake" onAction="#takeScreenshot" />
-                <Button text="Process" onAction="#takeScreenshot" />
+                <Button text="Process" onAction="#process" />
             </HBox>
+            <TextField fx:id="ocrResponse" prefWidth="250" promptText="Enter text here" />
+            <Button text="Ask ChatGPT" onAction="#process" />
+            <Label fx:id="chatGPTResponseLabel" />
         </VBox>
     </content>
 </DialogPane>

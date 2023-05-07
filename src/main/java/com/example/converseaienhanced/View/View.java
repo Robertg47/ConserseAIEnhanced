@@ -25,6 +25,12 @@ public class View {
     private ImageView screenshotImageView;
     FXMLLoader askForScreenshotFXML;
     FXMLLoader screenshotDialogFXML;
+    // Label ocrResponse;
+    // Button askGPTbtn;
+
+
+    @FXML private TextField ocrResponse;
+    @FXML private Label chatGPTResponseLabel;
 
     Stage stage;
 
@@ -43,6 +49,8 @@ public class View {
             askForScreenshotScene = new Scene(askForScreenshotFXML.load(), 200, 200);
             screenshotDialogScene = new Scene(screenshotDialogFXML.load(), 470, 460);
             screenshotImageView = (ImageView) screenshotDialogFXML.getNamespace().get("screenshotImageView");
+            // askGPTbtn = (Button) screenshotDialogFXML.getNamespace().get("askGPTbtn");
+            // ocrResponse = (Label) screenshotDialogFXML.getNamespace().get("ocrResponse");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -54,20 +62,7 @@ public class View {
     public void setSceneToAskForScreenshot(){
         stage.setScene(askForScreenshotScene);
     }
-    public void setSceneToShowScreenshot() {
-        File screenshotsDir = new File(".\\src\\main\\resources\\Screenshots");
-        String osName = System.getProperty("os.name").toLowerCase();
-        if (osName.contains("mac")) {
-            screenshotsDir = new File("src/main/resources/Screenshots");
-        }
-        File[] screenshots = screenshotsDir.listFiles();
-        if (screenshots == null || screenshots.length-1 == -1) {
-            System.out.println("no screenshots detected");
-            return;
-        }
-        Arrays.sort(screenshots, Comparator.comparing(File::getName));
-
-        File newestScreenshot = screenshots[screenshots.length-1];
+    public void setSceneToShowScreenshot(File newestScreenshot) {
         String path = newestScreenshot.getPath();
         String url = "empty";
         try {

@@ -2,6 +2,8 @@ package com.example.converseaienhanced.Model;
 
 import java.io.File;
 import Password.Password;
+import javafx.concurrent.Task;
+
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
@@ -34,6 +36,19 @@ public class Model {
             e.printStackTrace();
         }
         System.out.println("screenshot taken");
+    }
+
+    public String process(File file) {
+        ImageToTextApiRequestTask task = new ImageToTextApiRequestTask(file);
+        String txt = "";
+        try {
+            txt = task.call();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        System.out.println(txt);
+        return txt;
     }
 
     public String chatGptApiCall(String message) {
