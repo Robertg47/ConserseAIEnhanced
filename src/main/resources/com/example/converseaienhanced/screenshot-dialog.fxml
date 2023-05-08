@@ -17,7 +17,7 @@
                 <Button text="🔁" onAction="#takeScreenshot" styleClass="green-button-large" />
                 <Button text="🚀" onAction="#process" styleClass="green-button-large"/>
             </HBox>
-            <Label fx:id="ocrResponse"/>
+            <Text fx:id="ocrResponse"/>
             <Label fx:id="chatGPTResponseLabel" />
         </VBox>
     </content>

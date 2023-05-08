@@ -1,27 +1,17 @@
 package com.example.converseaienhanced.View;
 
 import com.example.converseaienhanced.Controller.Controller;
-import com.example.converseaienhanced.Model.Screenshot;
 import com.example.converseaienhanced.main;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import javafx.util.Callback;
 
-import java.awt.*;
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.net.MalformedURLException;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.Date;
-import java.util.Objects;
+import javafx.scene.text.Text;
 
 public class View {
 
@@ -31,7 +21,7 @@ public class View {
     @FXML
     private ImageView screenshotImageView;
     @FXML 
-    private javafx.scene.control.Label ocrResponse;
+    private Text ocrResponse;
 
     @FXML 
     private javafx.scene.control.Label chatGPTResponseLabel;
@@ -59,7 +49,7 @@ public class View {
             screenshotDialogScene.getStylesheets().add(main.class.getResource("style.css").toExternalForm());   // ADDING CSS to the second screen
 
             screenshotImageView = (ImageView) screenshotDialogFXML.getNamespace().get("screenshotImageView");
-            ocrResponse = (javafx.scene.control.Label) screenshotDialogFXML.getNamespace().get("ocrResponse");
+            ocrResponse = (Text) screenshotDialogFXML.getNamespace().get("ocrResponse");
             chatGPTResponseLabel = (javafx.scene.control.Label) screenshotDialogFXML.getNamespace().get("chatGPTResponseLabel");
             } catch (IOException e) {
             throw new RuntimeException(e);
@@ -75,8 +65,6 @@ public class View {
 
     public void setOcrResponseLabel(String ocrResponce){
         ocrResponse.setText(ocrResponce);
-        ocrResponse.setMaxWidth(180);
-        ocrResponse.setWrapText(true);
         System.out.println("here in view many times?");
     }
 
