@@ -31,7 +31,7 @@ public class View {
     @FXML
     private ImageView screenshotImageView;
     @FXML 
-    private javafx.scene.control.TextField ocrResponse;
+    private javafx.scene.control.Label ocrResponse;
 
     @FXML 
     private javafx.scene.control.Label chatGPTResponseLabel;
@@ -54,12 +54,12 @@ public class View {
         //System.out.println("ChatGpt: " + model.chatGptApiCall("reply only with the digit. How much is (sinx)^2 + (cosx)^2?"));
         try {
             askForScreenshotScene = new Scene(askForScreenshotFXML.load(), 180, 130); //
-            screenshotDialogScene = new Scene(screenshotDialogFXML.load(), 470, 460);
+            screenshotDialogScene = new Scene(screenshotDialogFXML.load(), 470, 550);
             askForScreenshotScene.getStylesheets().add(main.class.getResource("style.css").toExternalForm());   // ADDING CSS to the first screen
             screenshotDialogScene.getStylesheets().add(main.class.getResource("style.css").toExternalForm());   // ADDING CSS to the second screen
 
             screenshotImageView = (ImageView) screenshotDialogFXML.getNamespace().get("screenshotImageView");
-            ocrResponse = (javafx.scene.control.TextField) screenshotDialogFXML.getNamespace().get("ocrResponse");
+            ocrResponse = (javafx.scene.control.Label) screenshotDialogFXML.getNamespace().get("ocrResponse");
             chatGPTResponseLabel = (javafx.scene.control.Label) screenshotDialogFXML.getNamespace().get("chatGPTResponseLabel");
             } catch (IOException e) {
             throw new RuntimeException(e);
@@ -75,6 +75,9 @@ public class View {
 
     public void setOcrResponseLabel(String ocrResponce){
         ocrResponse.setText(ocrResponce);
+        ocrResponse.setMaxWidth(180);
+        ocrResponse.setWrapText(true);
+        System.out.println("here in view many times?");
     }
 
     public void setChatGPTResponseLabel(String chatGptResponse){

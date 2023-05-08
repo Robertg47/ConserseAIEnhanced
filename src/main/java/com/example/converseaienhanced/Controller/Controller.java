@@ -37,8 +37,9 @@ public class Controller {
 
     @FXML
     protected void process() {
-        ImageToTextApiRequestTask task = new ImageToTextApiRequestTask(getLastScreenshot());
+        //ImageToTextApiRequestTask task = new ImageToTextApiRequestTask(getLastScreenshot());
 
+        /*
         Thread thread = new Thread(task);
         thread.start();
 
@@ -49,7 +50,10 @@ public class Controller {
         }
         
         System.out.println(ImageToTextApiRequestTask.result);
-        view.setOcrResponseLabel(ImageToTextApiRequestTask.result);
+        */
+        //view.setOcrResponseLabel(ImageToTextApiRequestTask.result);
+        System.out.println("here in controller many times?");
+        view.setOcrResponseLabel("askg\npt WHY ARE YOU \nMOVING \nSO FAST");
     }
 
     public File getLastScreenshot(){
