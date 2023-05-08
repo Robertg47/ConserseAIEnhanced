@@ -2,9 +2,12 @@ package com.example.converseaienhanced.View;
 
 import com.example.converseaienhanced.Controller.Controller;
 import com.example.converseaienhanced.main;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
@@ -16,15 +19,12 @@ import javafx.scene.text.Text;
 public class View {
 
     @FXML
-    private javafx.scene.control.Button screenshotButton;
-
-    @FXML
     private ImageView screenshotImageView;
     @FXML 
     private Text ocrResponse;
 
-    @FXML 
-    private javafx.scene.control.Label chatGPTResponseLabel;
+    @FXML
+    private Text chatGPTResponseLabel;
 
     FXMLLoader askForScreenshotFXML;
     FXMLLoader screenshotDialogFXML;
@@ -50,7 +50,7 @@ public class View {
 
             screenshotImageView = (ImageView) screenshotDialogFXML.getNamespace().get("screenshotImageView");
             ocrResponse = (Text) screenshotDialogFXML.getNamespace().get("ocrResponse");
-            chatGPTResponseLabel = (javafx.scene.control.Label) screenshotDialogFXML.getNamespace().get("chatGPTResponseLabel");
+            chatGPTResponseLabel = (Text) screenshotDialogFXML.getNamespace().get("chatGPTResponseLabel");
             } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -59,19 +59,17 @@ public class View {
         stage.show();
     }
 
-    public void setSceneToAskForScreenshot(){
-        stage.setScene(askForScreenshotScene);
+    public String getOcrResponse(){
+        return ocrResponse.getText();
     }
 
     public void setOcrResponseLabel(String ocrResponce){
-        ocrResponse.setText(ocrResponce);
-        System.out.println("here in view many times?");
+        ocrResponse.setText(ocrResponce); //\n \n
     }
 
     public void setChatGPTResponseLabel(String chatGptResponse){
-        chatGPTResponseLabel.setText(chatGptResponse);
+        chatGPTResponseLabel.setText(chatGptResponse); //\n \n
     }
-
 
     public void setSceneToShowScreenshot(File newestScreenshot) {
         String path = newestScreenshot.getPath();

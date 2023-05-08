@@ -22,9 +22,6 @@ public class Controller {
     }
 
     @FXML
-    private Label welcomeText;
-
-    @FXML
     protected void takeScreenshot() {
         model.screenshot();
         try {
@@ -52,9 +49,19 @@ public class Controller {
         System.out.println(ImageToTextApiRequestTask.result);
         */
         //view.setOcrResponseLabel(ImageToTextApiRequestTask.result);
-        System.out.println("here in controller many times?");
-        view.setOcrResponseLabel("askg\npt WHY ARE YOU \nMOVING \nSO FAST");
+
+        String tesseractResponse = "2x2+2? \n a) 4 \n b) 6 \n c) 8\n";
+        String prompt = "This is a test question, please reply with an answer, and explain the answer \n " + tesseractResponse;
+        view.setOcrResponseLabel(prompt);
     }
+
+    @FXML
+    protected void chatGptRequest() {
+        String response = model.chatGptApiCall(view.getOcrResponse());
+
+        view.setChatGPTResponseLabel(response);
+    }
+
 
     public File getLastScreenshot(){
         File screenshotsDir = new File(".\\src\\main\\resources\\Screenshots");

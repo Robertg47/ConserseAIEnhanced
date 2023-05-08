@@ -18,7 +18,8 @@
                 <Button text="🚀" onAction="#process" styleClass="green-button-large"/>
             </HBox>
             <Text fx:id="ocrResponse"/>
-            <Label fx:id="chatGPTResponseLabel" />
+            <Button text="send To ChatGPT" onAction="#chatGptRequest" styleClass="green-button-large"/>
+            <Text fx:id="chatGPTResponseLabel" />
         </VBox>
     </content>
 </DialogPane>
