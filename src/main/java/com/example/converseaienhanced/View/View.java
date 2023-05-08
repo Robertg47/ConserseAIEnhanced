@@ -5,10 +5,13 @@ import com.example.converseaienhanced.Model.Screenshot;
 import com.example.converseaienhanced.main;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 
 import java.awt.*;
 import java.io.File;
@@ -18,21 +21,23 @@ import java.net.MalformedURLException;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.Objects;
 
 public class View {
+
+    @FXML
+    private javafx.scene.control.Button screenshotButton;
 
     @FXML
     private ImageView screenshotImageView;
     @FXML 
     private javafx.scene.control.TextField ocrResponse;
+
     @FXML 
     private javafx.scene.control.Label chatGPTResponseLabel;
 
     FXMLLoader askForScreenshotFXML;
     FXMLLoader screenshotDialogFXML;
-
-
-    
 
     Stage stage;
 
@@ -48,15 +53,18 @@ public class View {
         screenshotDialogFXML.setController(controller);
         //System.out.println("ChatGpt: " + model.chatGptApiCall("reply only with the digit. How much is (sinx)^2 + (cosx)^2?"));
         try {
-            askForScreenshotScene = new Scene(askForScreenshotFXML.load(), 200, 200);
+            askForScreenshotScene = new Scene(askForScreenshotFXML.load(), 180, 130); //
             screenshotDialogScene = new Scene(screenshotDialogFXML.load(), 470, 460);
+            askForScreenshotScene.getStylesheets().add(main.class.getResource("style.css").toExternalForm());   // ADDING CSS to the first screen
+            screenshotDialogScene.getStylesheets().add(main.class.getResource("style.css").toExternalForm());   // ADDING CSS to the second screen
+
             screenshotImageView = (ImageView) screenshotDialogFXML.getNamespace().get("screenshotImageView");
             ocrResponse = (javafx.scene.control.TextField) screenshotDialogFXML.getNamespace().get("ocrResponse");
             chatGPTResponseLabel = (javafx.scene.control.Label) screenshotDialogFXML.getNamespace().get("chatGPTResponseLabel");
             } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        stage.setTitle("Hello!");
+        stage.setTitle("ConverseAI");
         stage.setScene(askForScreenshotScene);
         stage.show();
     }
