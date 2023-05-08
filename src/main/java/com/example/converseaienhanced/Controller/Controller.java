@@ -49,7 +49,7 @@ public class Controller {
         }
         
         System.out.println(ImageToTextApiRequestTask.result);
-        view.ocrResponseTextFieldChange(ImageToTextApiRequestTask.result);
+        view.setOcrResponseLabel(ImageToTextApiRequestTask.result);
     }
 
     public File getLastScreenshot(){

@@ -24,9 +24,9 @@ public class View {
     @FXML
     private ImageView screenshotImageView;
     @FXML 
-    private TextField ocrResponse;
+    private javafx.scene.control.TextField ocrResponse;
     @FXML 
-    private Label chatGPTResponseLabel;
+    private javafx.scene.control.Label chatGPTResponseLabel;
 
     FXMLLoader askForScreenshotFXML;
     FXMLLoader screenshotDialogFXML;
@@ -51,6 +51,8 @@ public class View {
             askForScreenshotScene = new Scene(askForScreenshotFXML.load(), 200, 200);
             screenshotDialogScene = new Scene(screenshotDialogFXML.load(), 470, 460);
             screenshotImageView = (ImageView) screenshotDialogFXML.getNamespace().get("screenshotImageView");
+            ocrResponse = (javafx.scene.control.TextField) screenshotDialogFXML.getNamespace().get("ocrResponse");
+            chatGPTResponseLabel = (javafx.scene.control.Label) screenshotDialogFXML.getNamespace().get("chatGPTResponseLabel");
             } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -63,8 +65,12 @@ public class View {
         stage.setScene(askForScreenshotScene);
     }
 
-    public void ocrResponseTextFieldChange(String ocrResponce){
+    public void setOcrResponseLabel(String ocrResponce){
         ocrResponse.setText(ocrResponce);
+    }
+
+    public void setChatGPTResponseLabel(String chatGptResponse){
+        chatGPTResponseLabel.setText(chatGptResponse);
     }
 
 
