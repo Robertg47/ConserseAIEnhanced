@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
@@ -21,7 +22,7 @@ public class View {
     @FXML
     private ImageView screenshotImageView;
     @FXML 
-    private Text ocrResponse;
+    private TextArea ocrResponse;
 
     @FXML
     private Text chatGPTResponseLabel;
@@ -44,13 +45,15 @@ public class View {
         //System.out.println("ChatGpt: " + model.chatGptApiCall("reply only with the digit. How much is (sinx)^2 + (cosx)^2?"));
         try {
             askForScreenshotScene = new Scene(askForScreenshotFXML.load(), 180, 130); //
-            screenshotDialogScene = new Scene(screenshotDialogFXML.load(), 470, 550);
+            screenshotDialogScene = new Scene(screenshotDialogFXML.load(), 550, 550);
             askForScreenshotScene.getStylesheets().add(main.class.getResource("style.css").toExternalForm());   // ADDING CSS to the first screen
             screenshotDialogScene.getStylesheets().add(main.class.getResource("style.css").toExternalForm());   // ADDING CSS to the second screen
 
             screenshotImageView = (ImageView) screenshotDialogFXML.getNamespace().get("screenshotImageView");
-            ocrResponse = (Text) screenshotDialogFXML.getNamespace().get("ocrResponse");
+            ocrResponse = (TextArea) screenshotDialogFXML.getNamespace().get("ocrResponse");
             chatGPTResponseLabel = (Text) screenshotDialogFXML.getNamespace().get("chatGPTResponseLabel");
+            ocrResponse.setWrapText(true);
+            chatGPTResponseLabel.setWrappingWidth(500);
             } catch (IOException e) {
             throw new RuntimeException(e);
         }
