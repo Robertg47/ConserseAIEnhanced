@@ -2,6 +2,9 @@ package com.example.converseaienhanced.Model;
 
 import java.io.File;
 import Password.Password;
+
+import net.sourceforge.tess4j.Tesseract;
+import net.sourceforge.tess4j.TesseractException;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
@@ -24,6 +27,19 @@ public class Model {
 
     public Model() {
         this.apiKey = Password.getApiKey();// Replace with your actual API key or use a separate Password class
+    }
+
+    public static String extractTextFromImage(File imageFile) {
+        Tesseract tesseract = new Tesseract();
+        tesseract.setLanguage("eng");
+        tesseract.setDatapath("src\\main\\java\\com\\example\\converseaienhanced\\Tools\\tessdata");
+        try {
+            String result = tesseract.doOCR(imageFile);
+            return result;
+        } catch (TesseractException e) {
+            System.err.println(e.getMessage());
+            return "tesseract error";
+        }
     }
 
     public void screenshot(){

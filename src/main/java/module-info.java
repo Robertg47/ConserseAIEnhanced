@@ -7,6 +7,7 @@ module com.example.converseaienhanced {
     requires com.fasterxml.jackson.databind;
     requires java.desktop;
     requires javafx.swing;
+    requires tess4j;
 
 
     opens com.example.converseaienhanced to javafx.fxml;

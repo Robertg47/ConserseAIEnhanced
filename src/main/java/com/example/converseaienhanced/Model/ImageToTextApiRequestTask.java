@@ -17,6 +17,8 @@ public class ImageToTextApiRequestTask  extends Task<String>  {
 
     private final File screenshotFile;
 
+    public static String result = "";
+
     public ImageToTextApiRequestTask(File screenshotFile) {
         this.screenshotFile = screenshotFile;
     }
@@ -59,6 +61,7 @@ public class ImageToTextApiRequestTask  extends Task<String>  {
             } catch (Exception e) {
                 // "text" key not found in JSON response
             }
+            result = text;
             return text;
         } catch (IOException e) {
             e.printStackTrace();

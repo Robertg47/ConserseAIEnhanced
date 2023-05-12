@@ -1,28 +1,34 @@
 package com.example.converseaienhanced.View;
 
 import com.example.converseaienhanced.Controller.Controller;
-import com.example.converseaienhanced.Model.Screenshot;
 import com.example.converseaienhanced.main;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
-import java.awt.*;
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.net.MalformedURLException;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.Date;
+import javafx.scene.text.Text;
 
 public class View {
+    @FXML
+    private TextArea userPrompt;
 
     @FXML
     private ImageView screenshotImageView;
+    @FXML 
+    private TextArea ocrResponse;
+
+    @FXML
+    private Text chatGPTResponseLabel;
+
     FXMLLoader askForScreenshotFXML;
     FXMLLoader screenshotDialogFXML;
 
@@ -40,34 +46,39 @@ public class View {
         screenshotDialogFXML.setController(controller);
         //System.out.println("ChatGpt: " + model.chatGptApiCall("reply only with the digit. How much is (sinx)^2 + (cosx)^2?"));
         try {
-            askForScreenshotScene = new Scene(askForScreenshotFXML.load(), 200, 200);
-            screenshotDialogScene = new Scene(screenshotDialogFXML.load(), 470, 460);
+            askForScreenshotScene = new Scene(askForScreenshotFXML.load(), 250, 250); //
+            screenshotDialogScene = new Scene(screenshotDialogFXML.load(), 550, 550);
+            askForScreenshotScene.getStylesheets().add(main.class.getResource("style.css").toExternalForm());   // ADDING CSS to the first screen
+            screenshotDialogScene.getStylesheets().add(main.class.getResource("style.css").toExternalForm());   // ADDING CSS to the second screen
+            userPrompt = (TextArea) askForScreenshotFXML.getNamespace().get("userPrompt");
+            userPrompt.setWrapText(true);
+            
             screenshotImageView = (ImageView) screenshotDialogFXML.getNamespace().get("screenshotImageView");
-        } catch (IOException e) {
+            ocrResponse = (TextArea) screenshotDialogFXML.getNamespace().get("ocrResponse");
+            chatGPTResponseLabel = (Text) screenshotDialogFXML.getNamespace().get("chatGPTResponseLabel");
+            ocrResponse.setWrapText(true);
+            chatGPTResponseLabel.setWrappingWidth(500);
+            } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        stage.setTitle("Hello!");
+        stage.setTitle("ConverseAI");
         stage.setScene(askForScreenshotScene);
         stage.show();
     }
 
-    public void setSceneToAskForScreenshot(){
-        stage.setScene(askForScreenshotScene);
+    public String getOcrResponse(){
+        return ocrResponse.getText();
     }
-    public void setSceneToShowScreenshot() {
-        File screenshotsDir = new File(".\\src\\main\\resources\\screenshots");
-        String osName = System.getProperty("os.name").toLowerCase();
-        if (osName.contains("mac")) {
-            screenshotsDir = new File("src/main/resources/screenshots");
-        }
-        File[] screenshots = screenshotsDir.listFiles();
-        if (screenshots == null || screenshots.length-1 == -1) {
-            System.out.println("no screenshots detected");
-            return;
-        }
-        Arrays.sort(screenshots, Comparator.comparing(File::getName));
 
-        File newestScreenshot = screenshots[screenshots.length-1];
+    public void setOcrResponseLabel(String ocrResponce){
+        ocrResponse.setText(ocrResponce); //\n \n
+    }
+
+    public void setChatGPTResponseLabel(String chatGptResponse){
+        chatGPTResponseLabel.setText(chatGptResponse); //\n \n
+    }
+
+    public void setSceneToShowScreenshot(File newestScreenshot) {
         String path = newestScreenshot.getPath();
         String url = "empty";
         try {
@@ -80,5 +91,9 @@ public class View {
         screenshotImageView.setImage(new ImageView(url).getImage());
 
         stage.setScene(screenshotDialogScene);
+    }
+
+    public String getUserPrompt(){
+        return userPrompt.getText();
     }
 }

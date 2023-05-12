@@ -1,0 +1,31 @@
+.green-button {
+    -fx-background-color: #008f00;
+    -fx-border-color: #008f00;
+    -fx-background-radius: 10px;
+    -fx-border-radius: 10px;
+    -fx-text-fill: white;
+}
+.green-button:hover {
+    -fx-background-color: #00CC00;
+}
+.green-button:pressed {
+    -fx-background-color: #008800;
+}
+
+.green-button-large {
+    -fx-background-color: #008f00;
+    -fx-border-color: #008f00;
+    -fx-background-radius: 10px;
+    -fx-border-radius: 10px;
+    -fx-text-fill: white;
+    -fx-font-size: 22px;
+    -fx-padding: 5,0,0,0;
+}
+
+.green-button-large:hover {
+    -fx-background-color: #00CC00;
+}
+.green-button-large:pressed {
+    -fx-background-color: #008800;
+}
+
