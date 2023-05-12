@@ -32,7 +32,7 @@ public class Model {
     public static String extractTextFromImage(File imageFile) {
         Tesseract tesseract = new Tesseract();
         tesseract.setLanguage("eng");
-        tesseract.setDatapath("G:\\Program Files\\Tesseract-OCR\\tessdata");
+        tesseract.setDatapath("src\\main\\java\\com\\example\\converseaienhanced\\Tools\\tessdata");
         try {
             String result = tesseract.doOCR(imageFile);
             return result;

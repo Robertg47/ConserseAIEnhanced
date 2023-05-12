@@ -44,7 +44,7 @@ public class View {
         screenshotDialogFXML.setController(controller);
         //System.out.println("ChatGpt: " + model.chatGptApiCall("reply only with the digit. How much is (sinx)^2 + (cosx)^2?"));
         try {
-            askForScreenshotScene = new Scene(askForScreenshotFXML.load(), 180, 130); //
+            askForScreenshotScene = new Scene(askForScreenshotFXML.load(), 250, 250); //
             screenshotDialogScene = new Scene(screenshotDialogFXML.load(), 550, 550);
             askForScreenshotScene.getStylesheets().add(main.class.getResource("style.css").toExternalForm());   // ADDING CSS to the first screen
             screenshotDialogScene.getStylesheets().add(main.class.getResource("style.css").toExternalForm());   // ADDING CSS to the second screen
