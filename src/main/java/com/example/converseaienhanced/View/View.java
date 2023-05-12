@@ -18,6 +18,8 @@ import java.net.MalformedURLException;
 import javafx.scene.text.Text;
 
 public class View {
+    @FXML
+    private TextArea userPrompt;
 
     @FXML
     private ImageView screenshotImageView;
@@ -48,7 +50,9 @@ public class View {
             screenshotDialogScene = new Scene(screenshotDialogFXML.load(), 550, 550);
             askForScreenshotScene.getStylesheets().add(main.class.getResource("style.css").toExternalForm());   // ADDING CSS to the first screen
             screenshotDialogScene.getStylesheets().add(main.class.getResource("style.css").toExternalForm());   // ADDING CSS to the second screen
-
+            userPrompt = (TextArea) askForScreenshotFXML.getNamespace().get("userPrompt");
+            userPrompt.setWrapText(true);
+            
             screenshotImageView = (ImageView) screenshotDialogFXML.getNamespace().get("screenshotImageView");
             ocrResponse = (TextArea) screenshotDialogFXML.getNamespace().get("ocrResponse");
             chatGPTResponseLabel = (Text) screenshotDialogFXML.getNamespace().get("chatGPTResponseLabel");
@@ -87,5 +91,9 @@ public class View {
         screenshotImageView.setImage(new ImageView(url).getImage());
 
         stage.setScene(screenshotDialogScene);
+    }
+
+    public String getUserPrompt(){
+        return userPrompt.getText();
     }
 }
